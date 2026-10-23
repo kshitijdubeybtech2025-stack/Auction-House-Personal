@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pmf.aukcija.model.Advert;
 import com.pmf.aukcija.model.Offer;
@@ -34,7 +35,7 @@ public class OfferController {
 	
 	//Method for bidding on auction
 	@RequestMapping(value="offer", method=RequestMethod.POST) 
-	public String offer(@ModelAttribute("currentPrice") Double currentPrice, @ModelAttribute("advert") Advert advert, @ModelAttribute("user") User user,  HttpServletRequest request) {
+	public String offer(@RequestParam("currentPrice") Double currentPrice, @ModelAttribute("advert") Advert advert, @ModelAttribute("user") User user, HttpServletRequest request) {
 		Advert a = (Advert) request.getSession().getAttribute("advert");
 		User u = (User) request.getSession().getAttribute("user");
 		List<Offer> offers = os.getAllOffersByOrderByIdOfferDesc();
@@ -51,7 +52,7 @@ public class OfferController {
 				return "redirect:/auction/advert?idProduct="+idAdvert;
 			} 
 			
-			a.setCurrentPrice(advert.getCurrentPrice());
+			a.setCurrentPrice(currentPrice);
 			
 			offer.setAdvert(a);
 			offer.setUser(u);	

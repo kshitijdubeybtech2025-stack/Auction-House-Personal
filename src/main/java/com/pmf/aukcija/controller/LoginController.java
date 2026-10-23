@@ -1,7 +1,6 @@
 package com.pmf.aukcija.controller;
 
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,7 +76,13 @@ public class LoginController {
 	//and try again. Also we send all informations we need in welcome.jsp.
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(ModelMap modelMap, @ModelAttribute("username") String username, @ModelAttribute("password") String password, HttpServletRequest request) {
-		User u=us.getUserByUsernameAndPassword2(username, password);
+		User u=us.getUserByUsername(username);
+if(u != null) {
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    if(!passwordEncoder.matches(password, u.getPassword())) {
+        u = null;
+    }
+}
 		List<AdvertCategory> advertCategories = acs.getAllAdvertCategories();
 		List<Message> messages = ms.getAllMessages();
 		List<Rating> rating = rs.getAllRatings();
