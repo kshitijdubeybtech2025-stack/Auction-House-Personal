@@ -1,3 +1,5 @@
+// Feature: User Authentication - Developed by Kshitij Dubey (PRN: 25070122249)
+// Implements BCrypt password verification for secure login
 package com.pmf.aukcija.controller;
 
 import java.text.SimpleDateFormat;
