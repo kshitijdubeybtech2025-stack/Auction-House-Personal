@@ -1,3 +1,5 @@
+// Feature: Bidding System - Developed by Nakul Dhoot (PRN: 25070122264)
+// Implements real-time bid validation and price update logic
 package com.pmf.aukcija.controller;
 
 import java.text.SimpleDateFormat;
